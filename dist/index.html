@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GANLAND - Generative Art Network</title>
+  <meta name="description" content="GANLAND - AI-powered generative art platform for artists and musicians. Deploy smart contracts on the Superchain.">
+  <meta property="og:title" content="GANLAND - Generative Art Network">
+  <meta property="og:description" content="AI-powered generative art platform for artists and musicians on the Superchain.">
+  <meta property="og:image" content="https://ganland.io/og-image.jpg">
+  <meta property="og:url" content="https://ganland.io">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ganland.io/og-image.jpg">
+  <meta name="twitter:site" content="@GanlandNFT">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon-B2IjKcWi.svg">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="/assets/main-D0ack2p5.css">
+</head>
+<body>
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrix-rain"></canvas>
+  
+  <!-- Generative Mountain Silhouettes -->
+  <canvas id="mountains"></canvas>
+  
+  <!-- VHS Glitch Overlay -->
+  <div class="vhs-overlay">
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="glitch-bar"></div>
+  </div>
+  
+  <!-- Main Content -->
+  <main class="content">
+    <div class="logo-container glitch" data-text="GANLAND">
+      <h1 class="logo">GANLAND</h1>
+    </div>
+    
+    <p class="tagline typewriter">GENERATIVE ART NETWORK</p>
+    
+    <!-- Bitcoin Halving Countdown -->
+    <div class="countdown-container">
+      <p class="countdown-label">NEXT BITCOIN HALVING</p>
+      <div class="countdown" id="halving-countdown">
+        <div class="time-block">
+          <span class="time-value" id="days">000</span>
+          <span class="time-label">DAYS</span>
+        </div>
+        <div class="time-separator">:</div>
+        <div class="time-block">
+          <span class="time-value" id="hours">00</span>
+          <span class="time-label">HRS</span>
+        </div>
+        <div class="time-separator">:</div>
+        <div class="time-block">
+          <span class="time-value" id="minutes">00</span>
+          <span class="time-label">MIN</span>
+        </div>
+        <div class="time-separator">:</div>
+        <div class="time-block">
+          <span class="time-value" id="seconds">00</span>
+          <span class="time-label">SEC</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Launch App Button -->
+    <a href="https://ganland.ai" class="launch-btn">
+      <span class="btn-text">LAUNCH APP</span>
+      <span class="btn-glitch"></span>
+    </a>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-nav">
+      <a href="/terms">Terms</a>
+      <span class="separator">|</span>
+      <a href="/privacy">Privacy</a>
+      <span class="separator">|</span>
+      <a href="https://x.com/GanlandNFT" target="_blank">X</a>
+    </nav>
+    <p class="copyright">© 2026 GANLAND. All rights reserved.</p>
+  </footer>
+
+  <script src="/matrix.js"></script>
+  <script src="/mountains.js"></script>
+  <script src="/glitch.js"></script>
+  <script src="/countdown.js"></script>
+</body>
+</html>
