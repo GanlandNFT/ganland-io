@@ -1,0 +1,413 @@
+/* =====================================================
+   GANLAND.IO - Cyberpunk Landing Page
+   Matrix Code + 90s VHS Glitch + Generative Mountains
+   ===================================================== */
+
+:root {
+  --matrix-yellow: #ffcc00;
+  --matrix-red: #ff3333;
+  --neon-glow: #ffcc00;
+  --bg-black: #0a0a0a;
+  --text-dim: #333;
+  --text-bright: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-black);
+  font-family: 'VT323', 'Share Tech Mono', monospace;
+  color: var(--matrix-yellow);
+}
+
+/* Canvas Layers */
+#matrix-rain, #mountains {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#mountains {
+  z-index: 2;
+  opacity: 0.4;
+}
+
+/* VHS Overlay Effects */
+.vhs-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.scanlines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  animation: scanlines 0.1s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+.noise {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.1;
+  animation: noise 0.2s steps(4) infinite;
+}
+
+@keyframes noise {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-1%, 1%); }
+  50% { transform: translate(1%, -1%); }
+  75% { transform: translate(-1%, -1%); }
+}
+
+.glitch-bar {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: var(--matrix-red);
+  opacity: 0;
+  animation: glitch-bar 8s ease-in-out infinite;
+}
+
+@keyframes glitch-bar {
+  0%, 90%, 100% { 
+    opacity: 0;
+    top: 50%;
+  }
+  92% {
+    opacity: 0.8;
+    top: 20%;
+    height: 8px;
+    background: var(--matrix-red);
+  }
+  94% {
+    opacity: 0;
+    top: 70%;
+  }
+  96% {
+    opacity: 0.6;
+    top: 35%;
+    height: 2px;
+    background: var(--matrix-yellow);
+  }
+  98% {
+    opacity: 0;
+  }
+}
+
+/* Main Content */
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Logo with Glitch Effect */
+.logo-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: var(--matrix-yellow);
+  text-shadow: 
+    0 0 10px var(--matrix-yellow),
+    0 0 20px var(--matrix-yellow),
+    0 0 40px var(--matrix-yellow),
+    0 0 80px rgba(255, 204, 0, 0.5);
+  animation: flicker 4s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(3rem, 12vw, 8rem);
+  letter-spacing: 0.3em;
+}
+
+.glitch::before {
+  color: var(--matrix-red);
+  text-shadow: 0 0 10px var(--matrix-red);
+  animation: glitch-1 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch::after {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+  animation: glitch-2 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+  0%, 90%, 100% { transform: translate(0); }
+  91% { transform: translate(-3px, 1px); }
+  93% { transform: translate(3px, -1px); }
+  95% { transform: translate(-2px, 2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 88%, 100% { transform: translate(0); }
+  89% { transform: translate(2px, -2px); }
+  92% { transform: translate(-3px, 1px); }
+  96% { transform: translate(1px, 2px); }
+}
+
+/* Tagline with Typewriter Effect */
+.tagline {
+  font-family: 'VT323', monospace;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  letter-spacing: 0.5em;
+  color: var(--matrix-yellow);
+  opacity: 0.8;
+  margin-bottom: 3rem;
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--matrix-yellow);
+  white-space: nowrap;
+  animation: 
+    typing 2s steps(24) forwards,
+    blink 0.8s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; max-width: 500px; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Bitcoin Halving Countdown */
+.countdown-container {
+  margin-bottom: 3rem;
+}
+
+.countdown-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--matrix-red);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-value {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  color: var(--matrix-yellow);
+  text-shadow: 0 0 10px var(--matrix-yellow);
+  min-width: 3ch;
+}
+
+.time-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+}
+
+.time-separator {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  color: var(--matrix-red);
+  animation: blink 1s step-end infinite;
+}
+
+/* Launch Button */
+.launch-btn {
+  position: relative;
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.3em;
+  color: var(--bg-black);
+  background: var(--matrix-yellow);
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.launch-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.launch-btn:hover {
+  background: var(--matrix-red);
+  color: var(--text-bright);
+  box-shadow: 
+    0 0 20px var(--matrix-red),
+    0 0 40px var(--matrix-red),
+    inset 0 0 20px rgba(255, 51, 51, 0.3);
+  transform: scale(1.05);
+}
+
+.launch-btn:hover::before {
+  left: 100%;
+}
+
+.btn-glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--matrix-red);
+  opacity: 0;
+  animation: btn-glitch 5s infinite;
+}
+
+@keyframes btn-glitch {
+  0%, 95%, 100% { opacity: 0; transform: translate(0); }
+  96% { opacity: 0.3; transform: translate(-5px, 2px); }
+  97% { opacity: 0; }
+  98% { opacity: 0.2; transform: translate(3px, -1px); }
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  z-index: 10;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+.footer-nav {
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav a {
+  color: var(--matrix-yellow);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.footer-nav a:hover {
+  opacity: 1;
+  text-shadow: 0 0 10px var(--matrix-yellow);
+}
+
+.separator {
+  margin: 0 1rem;
+  opacity: 0.3;
+}
+
+.copyright {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .countdown {
+    flex-wrap: wrap;
+  }
+  
+  .time-separator {
+    display: none;
+  }
+  
+  .time-block {
+    min-width: 60px;
+  }
+  
+  .launch-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+}
